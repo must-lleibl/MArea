@@ -4,10 +4,10 @@
 __PocketMine Plugin__
 name=MArea
 description=Just the best world protection you ever seen
-version=private plugin editing p1
+version=private plugin editing p3
 author=must and xktiverz
 class=MArea
-apiversion=12,13,14
+apiversion=12,13
 */
 
 /*
@@ -19,4 +19,12 @@ apiversion=12,13,14
 here you must write ^whats news goes by coding^
 
 */
-lets get started then...
+
+class MArea implements Plugin{
+	public function __construct(ServerAPI $api, $s = 0) {
+	}
+	public function init() {
+	}
+	public function __destruct() {
+	}
+}
