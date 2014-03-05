@@ -6,7 +6,7 @@ name=MArea
 description=Just the best world protection you ever seen
 version=private plugin editing p1
 author=must and xktiverz
-class=MArea
+class=MAreaPlugin
 apiversion=12,13
 */
 
@@ -20,12 +20,19 @@ LETS GET STARTED THEN
 */
 
 
-class MArea implements Plugin{
-
+class MAreaPlugin implements Plugin{
 	public function __construct(ServerAPI $api, $s = 0) {
 	}
 	public function init() {
 	}
 	public function __destruct() {
+	}
+}
+class MArea {
+	public $owner;
+	public $coOwners = array();
+	public $flag;
+	public function __construct(Position $start, Position $end, Player $owner) {
+		
 	}
 }
