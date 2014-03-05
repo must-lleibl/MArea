@@ -11,7 +11,7 @@ apiversion=12,13
 */
 
 /*
-//in line *version* will have to write in what percent will progress goes\\
+//in line *version* will have to write in what percent will progress goes
 Here is the progress record:
 Created MArea class and permission checker TODO split the in-area/in-space checker into an independent function
 To decide: area (2D) or space (3D)
