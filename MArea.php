@@ -87,7 +87,7 @@ class MArea {
 	const FLAG_FURNACE_ALLOW = 16; // FLAG_NONE but allow using furnaces
 	const FLAG_CHEST_ALLOW = 32; // FLAG_NONE but allow using chests
 	const FLAG_CONTAINER_ALLOW = FLAG_FURNACE_ALLOW | FLAG_CHEST_ALLOW; // FLAG_NONE but (FLAG_FURNACE_ALLOW and FLAG_CHEST_ALLOW)
-	const FLAG_ALL = 16384; // largest all-1 int // all flags enabled
+	const FLAG_ALL = 16383; // largest all-1 int // all flags enabled
 	private $external = false;
 	public $owner;
 	public $owners = array();
