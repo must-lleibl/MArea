@@ -20,6 +20,12 @@ p60:	Player moving
 		TODO: Make language customizable
 */
 
+/*
+must think about how to create message ,when plugin starts with server
+server shows you message after loding plugins. "everething is connected with a MArea" green colour.
+it must be down there,before class MAreaPG implements plugin...
+*/
+
 
 class MAreaPg implements Plugin {
 	public static $instance = false;
