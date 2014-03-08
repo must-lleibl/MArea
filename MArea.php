@@ -29,7 +29,7 @@ it must be down there,before class MAreaPG implements plugin...
 
 class MAreaPg implements Plugin {
 	public static $instance = false;
-	public static request() {
+	public static function request() {
 		return self::$instance;
 	}
 	public $a, $c;
@@ -89,7 +89,9 @@ class MAreaPg implements Plugin {
 class MArea {
 	const FLAG_NONE = 0x00; // disallow all block touching only
 	const FLAG_ENTER_FREE = 1; // FLAG_NONE and disallow anyone entering
-	const FLAG_PVP_FREE = 2; // FLAG_NONE and disallow anyone in this area to attack, or disallow anyone to attack people in this area
+	const FLAG_ATTACK_FREE = 2;
+	const FLAG_ATTACKED_FREE = 4;
+	const FLAG_PVP_FULL_FREE = FLAG_ATTACK_FREE | FLAG_ATTACKED_FREE;
 	const FLAG_FURNACE_ALLOW = 16; // FLAG_NONE but allow using furnaces
 	const FLAG_CHEST_ALLOW = 32; // FLAG_NONE but allow using chests
 	const FLAG_CONTAINER_ALLOW = FLAG_FURNACE_ALLOW | FLAG_CHEST_ALLOW; // FLAG_NONE but (FLAG_FURNACE_ALLOW and FLAG_CHEST_ALLOW)
@@ -187,6 +189,5 @@ class MArea {
 				"flags" => $this->flag,
 		));
 	}
-	// FEATURE permision to enter the area/space
 	// TODO decide how to make the permissions
 }
