@@ -95,7 +95,7 @@ class MArea {
 	const FLAG_FURNACE_ALLOW = 16; // FLAG_NONE but allow using furnaces
 	const FLAG_CHEST_ALLOW = 32; // FLAG_NONE but allow using chests
 	const FLAG_CONTAINER_ALLOW = FLAG_FURNACE_ALLOW | FLAG_CHEST_ALLOW; // FLAG_NONE but (FLAG_FURNACE_ALLOW and FLAG_CHEST_ALLOW)
-	const FLAG_ALL = 16383; // largest all-1 int // all flags enabled
+	const FLAG_ALL = 32767; // largest all-1 int // all flags enabled
 	private $external = false;
 	public $owner;
 	public $owners = array();
@@ -118,25 +118,28 @@ class MArea {
 			$this->end = $end;
 			$this->owner = $owner;
 			$this->owners[] = strtolower($owner->username);
-			if($name === false){
-				$pg = MAreaPg::request();
-				$path = $pg->a->configPath($pg)."MAreas/";
-				$id = 0;
-				while(file_exists($path."MArea-$id.yml")){
-					$id++;
-				}
-				$this->external = new Config($path."MArea-$id.yml", CONFIG_YAML, array(
-						"owners" => $this->owners,
-						"position-start" => array($start->x, $start->y, $start->z, $start->level->getName()),
-						"position-end" => array($end->x, $end->y, $end->z, $end->level->getName()),,
-						"creator" => $owner->username,
-						"flags" => 0,
-				));
+			if($name === false)
+				$name="untitled";
+			$pg = MAreaPg::request();
+			$path = $pg->a->configPath($pg)."MAreas/";
+			$id = 0;
+			while(file_exists($path."MArea-$name-$id.yml")){
+				$id++;
 			}
+			$this->external = new Config($path."MArea-$name-$id.yml", CONFIG_YAML, array(
+					"owners" => $this->owners,
+					"position-start" => array($start->x, $start->y, $start->z, $start->level->getName()),
+					"position-end" => array($end->x, $end->y, $end->z, $end->level->getName()),,
+					"creator" => $owner->username,
+					"flags" => 0,
+					"name" => $name,
+			));
+			$this->name = $name;
 		}
-		ServerAPI::request()->addHandler("player.block.touch", array($this, "touchCheck"));
-		ServerAPI::request()->addHandler("player.block.place", array($this, "touchCheck"));
-		ServerAPI::request()->addHandler("player.move", array($this, "moveCheck"));
+		ServerAPI::request()->addHandler("player.block.touch", array($this, "touchCheck"), 8);
+		ServerAPI::request()->addHandler("player.block.place", array($this, "touchCheck"), 8);
+		ServerAPI::request()->addHandler("player.move", array($this, "moveCheck"), 8);
+		ServerAPI::request()->addHandler("player.move", array($this, "moveCheckLP"), 7); // lower priority
 		ServerAPI::request()->schedule(1200, array($this, "save"), array(), true);
 	}
 	public function touchCheck($data) {
@@ -158,6 +161,19 @@ class MArea {
 		$data->player->teleport(MArea::request()->getLastSecPos($data->player));
 		$data->player->sendChat("Well, I don't think you have permission to enter this area.");
 	}
+	public function moveCheckLP($data){
+		if($data->class !== ENTITY_PLAYER)
+			return;
+		$player = $data->player;
+		if(isset($this->insiders[$player->username]) and $this->insiders[$player->username] === true){
+			if($this->checkInside($data) === false)
+				$player->sendChat("You have just exited $this.");
+		}
+		elseif($this->checkInside($data) === true){
+			$this->insiders[$player->username] = true;
+			$player->sendChat("You have just entered $this.");
+		}
+	}
 	public function addOwner(Player $player){
 		$this->owners[] = strtolower($player->username); // well yes I should use $player->iusername but I am not sure
 	}
@@ -173,6 +189,9 @@ class MArea {
 			return true;
 		}
 		return false;
+	}
+	public function __toString(){
+		return "The MArea of ".$this->owner.", named ".$this->name;
 	}
 	public function __destruct(){
 		$this->save();
