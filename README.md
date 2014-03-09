@@ -9,4 +9,5 @@ I dont want to submit this plugin right now but I will in future.
 
 ==============================================================================================
 
-OH AND XKTIVERZ wont help us/ cuz some stupid plagiarism persons copied his code.
+OH AND ZeroMinusSeven will help us.
+Whisper:secretly he is xktiverz)))) but maybe not))))
