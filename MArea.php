@@ -4,7 +4,7 @@
 __PocketMine Plugin__
 name=MArea
 description=Just the best world protection you ever seen
-version=private plugin editing p60
+version=private plugin editing p61
 author=must and PEMapModder
 class=MAreaPg
 apiversion=12,13
@@ -24,6 +24,11 @@ p60:	Player moving
 must think about how to create message ,when plugin starts with server
 server shows you message after loding plugins. "everething is connected with a MArea" green colour.
 it must be down there,before class MAreaPG implements plugin...
+-------------------------
+Help me to run this text in console
+public function init(){
+console(FORMAT_GREEN." Everything is connected with your own area");
+}
 */
 
 
