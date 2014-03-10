@@ -29,6 +29,9 @@ Help me to run this text in console
 public function init(){
 console(FORMAT_GREEN." Everything is connected with your own area");
 }
+
+#Note by PEMapModder: I believe this is not necessary unless for debug. I don't think a server owner want to read spams like this.
+But if for debug, I will put a debug constant.
 */
 
 
