@@ -9,6 +9,4 @@ I dont want to submit this plugin right now but I will in future.
 
 ==============================================================================================
 
-Yay, I think I can help you too!
-
- - ZeroMinusSeven
+Yay, I think I can help you too! - ZeroMinusSeven
