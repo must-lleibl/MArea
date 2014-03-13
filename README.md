@@ -9,5 +9,6 @@ I dont want to submit this plugin right now but I will in future.
 
 ==============================================================================================
 
-OH AND ZeroMinusSeven will help us.
-Whisper:secretly he is xktiverz)))) but maybe not))))
+Yay, I think I can help you too!
+
+ - ZeroMinusSeven
