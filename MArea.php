@@ -87,15 +87,15 @@ class MAreaPg implements Plugin {
 	}
 }
 class MArea {
-	const FLAG_NONE = 0x00; // disallow all block touching only
-	const FLAG_ENTER_FREE = 1; // FLAG_NONE and disallow anyone entering
-	const FLAG_ATTACK_FREE = 2;
-	const FLAG_ATTACKED_FREE = 4;
-	const FLAG_PVP_FULL_FREE = FLAG_ATTACK_FREE | FLAG_ATTACKED_FREE;
-	const FLAG_FURNACE_ALLOW = 16; // FLAG_NONE but allow using furnaces
-	const FLAG_CHEST_ALLOW = 32; // FLAG_NONE but allow using chests
+	const FLAG_NONE =			0b00000000; // disallow all block touching only
+	const FLAG_ENTER_FREE =		0b00000001; // FLAG_NONE and disallow anyone entering
+	const FLAG_ATTACK_FREE =	0b00000010;
+	const FLAG_ATTACKED_FREE =	0b00000100;
+	const FLAG_PVP_FULL_FREE =	FLAG_ATTACK_FREE | FLAG_ATTACKED_FREE;
+	const FLAG_FURNACE_ALLOW =	0b00001000; // FLAG_NONE but allow using furnaces
+	const FLAG_CHEST_ALLOW =	0b00010000; // FLAG_NONE but allow using chests
 	const FLAG_CONTAINER_ALLOW = FLAG_FURNACE_ALLOW | FLAG_CHEST_ALLOW; // FLAG_NONE but (FLAG_FURNACE_ALLOW and FLAG_CHEST_ALLOW)
-	const FLAG_ALL = 32767; // largest all-1 int // all flags enabled
+	const FLAG_ALL =			0b11111111; // all flags enabled
 	private $external = false;
 	public $owner;
 	public $owners = array();
